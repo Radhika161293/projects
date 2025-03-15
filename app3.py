@@ -2,14 +2,13 @@ import streamlit as st
 import pandas as pd
 from sqlalchemy import create_engine
 
-# Database connection
+
 db_url = "mysql+pymysql://3p4fdyCt9Bzwfkh.root:w38mCpM1dvOB8CGL@gateway01.eu-central-1.prod.aws.tidbcloud.com:4000/PROJECT?ssl_verify_cert=false"
 engine = create_engine(db_url)
 
-# Streamlit UI
 st.title("Sales Data Analysis Dashboard")
 
-# Sidebar for navigation
+
 options = [
     "Top 10 High Revenue Items",
     "Top 5 Cities by Profit Margins",
@@ -25,11 +24,11 @@ options = [
 
 selection = st.sidebar.selectbox("Select Analysis", options)
 
-# Query execution function
+
 def fetch_data(query):
     return pd.read_sql(query, con=engine)
 
-# Query dictionary
+
 queries = {
     "Top 10 High Revenue Items": """
         SELECT sub_category, SUM(sale_price * quantity) AS calc_price 
